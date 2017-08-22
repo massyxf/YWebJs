@@ -1,0 +1,142 @@
+<html>
+    <head lang="zh">
+        <meta charset="utf-8">
+        <style type="text/css">
+            span{
+                color: red;
+            }
+/*
+            button{
+                background-color: blue;
+            }
+*/
+            a{
+                text-decoration: none;
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" href="../css/body.css">
+    </head>
+    
+    <body>
+        body
+        <a href="http://www.baidu.com">baidu</a>
+<!--
+        <h1 align="center">this is a title</h1>
+        <a href="http://www.baidu.com">baidu</a>
+        <img src="../sources/1.jpg" width="100">
+-->
+        <button bgcolor="red" id="baidu">button1</button>
+        <button bgcolor="blue">button2</button>
+        <button bgcolor="green">button3</button>
+        
+        <div>
+<!--
+            <button bgcolor="red">button1</button>
+            <button bgcolor="blue">button2</button>
+            <button bgcolor="green">button3</button>
+-->
+            <h1>it's a title 1</h1>
+            <h1>it's a title 2</h1>
+            <h1>it's a title 3</h1>
+        </div>
+        
+        <span>
+<!--
+            <button bgcolor="red">button1</button>
+            <button bgcolor="blue">button2</button>
+            <button bgcolor="green">button3</button>
+-->
+            <h1>it's a title 1</h1>
+            <h1>it's a title 2</h1>
+            <h1>it's a title 3</h1>
+        </span>
+        <span>
+<!--
+            <button bgcolor="red">button1</button>
+            <button bgcolor="blue">button2</button>
+            <button bgcolor="green">button3</button>
+-->
+            <h1>it's a title 1</h1>
+            <h1>it's a title 2</h1>
+            <h1>it's a title 3</h1>
+        </span>
+        
+        <span>
+            分析：从上图很容易知道“我是内容一；用的div”和“我是内容二；用的div”两个内容外部用的是'div'标签，他们得到样式是占用了一排空间（相当于换行一样）；而“我是内容三；用的span”和“我是内容四；用的span”则，文字内容有多宽，就占用多宽距离，使用'span'标签和不使用一样效果。
+        </span>
+        <br/>
+        这是长的引用:
+        <blockquote>
+            这是长的引用。这是长的引用。这是长的引用。这是长的引用。这是长的引用。这是长的引用。这是长的引用。这是长的引用。这是长的引用。这是长的引用。这是长的引用。
+        </blockquote>
+        
+        这是短的引用：
+        <q>
+            这是短的引用：
+        </q>
+        
+        <p>
+            <del>删除线</del>
+            <ins>下划线</ins>
+            <ins><em>下划线</em></ins>
+        </p>
+        <span>地址标签</span><span>地址标签</span>
+        
+        <address>
+            Written by Jon Doe.<br> 
+            Visit us at:<br>
+            Example.com<br>
+            Box 564, Disneyland<br>
+            USA
+        </address>
+        
+        <p><cite>The Scream</cite> by Edward Munch. Painted in 1893.</p>
+        
+        <bdo dir="rtl">this text will be written from right to left</bdo>
+        
+        
+<!--        console.log("test webview called with:")-->
+        
+        <script>
+            console.log("ahhahahahahaha")
+             function setupWebViewJavascriptBridge(callback) {
+                 if (window.WebViewJavascriptBridge) { 
+                     return callback(WebViewJavascriptBridge); 
+                 }
+                 if (window.WVJBCallbacks) { 
+                     return window.WVJBCallbacks.push(callback); 
+                 }
+                 window.WVJBCallbacks = [callback];
+                 var WVJBIframe = document.createElement('iframe');
+                 WVJBIframe.style.display = 'none';
+                 WVJBIframe.src = 'https://__bridge_loaded__';
+                 document.documentElement.appendChild(WVJBIframe);
+                 setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+             }
+            console.log("before set function")
+            
+            setupWebViewJavascriptBridge(function(bridge) {
+                console.log("set function")
+                                         
+<!--                                         接收客服端发送的消息>
+                bridge.registerHandler('test_webview', function(data, responseCallback) {
+                    console.log("test webview called with:", data)
+<!--                                  网页端处理消息后，客户端的回调     -->
+                    responseCallback(data)
+                })
+                var redBtn = document.getElementById("baidu")
+                console.log(redBtn)
+                redBtn.onclick = function(e) {
+                    e.preventDefault()
+<!--                                       网页端给客户端发消息  -->
+                    bridge.callHandler('test_webview', {'milk':'tea'}, function responseCallback(responseData) {
+                    console.log("JS received response:", responseData)
+                })
+                }    
+            })
+            
+        </script>
+        
+        
+    </body>
+</html>
